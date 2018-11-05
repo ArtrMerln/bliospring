@@ -4,9 +4,9 @@
 <nav>
 	<ul>
 
-		<li><a href="/agendaspring/" >Home</a></li>
-		<li><a href="/agendaspring/contatos/form" >adicionar contato</a></li>
-		<li><a href="/agendaspring/contatos" >listar contatos</a></li>
+		<li><a href="/bliospring/" >Home</a></li>
+		<li><a href="/bliospring/aluno/form" >adicionar aluno</a></li>
+		<li><a href="/bliospring/aluno" >listar alunos</a></li>
 	
 
 	</ul>
