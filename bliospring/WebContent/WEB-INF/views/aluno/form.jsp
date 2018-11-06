@@ -10,7 +10,7 @@
 <body>
 <h1> adicionar aluno </h1>
 
-<form action="/bliospring/aluno"> 
+<form action="/bliospring/aluno" method="post"> 
 
 
 

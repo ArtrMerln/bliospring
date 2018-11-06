@@ -14,6 +14,7 @@ import java.util.List;
 import dao.ConnectionFactory;
 import models.Aluno;
 
+
 public class AlunoDAO {
 	private Connection connection;
 
@@ -21,7 +22,7 @@ public class AlunoDAO {
 		connection = ConnectionFactory.getConnection();
 	}
 
-	public boolean inserir(Aluno aluno) { 
+	public boolean inserir(Aluno aluno) {
 
 		String sql = "insert into alunos (nome, matricula, cpf, endereco, dataNascimento) values (?, ?, ?, ?, ?);";
 
@@ -36,8 +37,9 @@ public class AlunoDAO {
 
 			stmt.execute();
 			stmt.close();
-		} catch (SQLException e) {
 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}

@@ -2,11 +2,14 @@ package models;
 
 import java.util.Calendar;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Aluno {
 	private String nome;
 	private String matricula;
 	private String cpf;
 	private String endereco;
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Calendar dataNascimento;
 	private Long id;
 
