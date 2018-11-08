@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%><%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,7 +9,8 @@
 <title>todos os alunos; Projeto biblioteca</title>
 </head>
 <body>
-<table  border="1" class="table">
+	<c:import url="../Menu.jsp"></c:import>
+	<table border="1" class="table">
 
 		<thead>
 
@@ -17,11 +20,12 @@
 				<th>CPF</th>
 				<th>Endereço</th>
 				<th>Data de Nascimento</th>
+				<th>Remoção</th>
 			</tr>
 		</thead>
 
 		<tbody>
-			<c:forEach var="aluno" items="${alunos}">
+			<c:forEach var="aluno" items="${aluno}">
 
 
 				<tr>
@@ -30,8 +34,11 @@
 					<td>${aluno.matricula}</td>
 					<td>${aluno.cpf}</td>
 					<td>${aluno.endereco }</td>
-					<td>${aluno.dataNascimento.time }</td>
+					<td><fmt:formatDate value="${aluno.dataNascimento.time }"
+							pattern="dd/MM/yyyy" /></td>
+					<td><a href="/bliospring/aluno/remover?id=${aluno.id}">Remover</a></td>
 				</tr>
+
 			</c:forEach>
 
 		</tbody>

@@ -18,59 +18,29 @@ public class AlunoController {
 		System.out.println("Chamou o form de aluno");
 		return "aluno/form";
 	}
+
 	@PostMapping("/aluno")
 	public String adicionar(Aluno aluno) {
 		AlunoDAO alunodao = new AlunoDAO();
-		System.out.println("quase la");
-		
 		alunodao.inserir(aluno);
-		System.out.println("indo");
+		System.out.println("adicionou");
 		return "redirect:aluno";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	@GetMapping("/aluno")
-	public ModelAndView listar () {
-		System.out.println("chamou a listagem");
+	public ModelAndView listar() {
+		System.out.println("chamou a listagem de aluno");
 		AlunoDAO alunodao = new AlunoDAO();
-		List<Aluno> listand = alunodao.getLista();	
-			ModelAndView model = new ModelAndView("aluno/lista");	
-	model.addObject("alunos", listand);
-	return model;
+		List<Aluno> listand = alunodao.getLista();
+		ModelAndView model = new ModelAndView("aluno/lista");
+		model.addObject("aluno", listand);
+		return model;
 	}
-	
-	
-	
-	
-	
-	
-	}
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	@RequestMapping("/aluno/remover")
+	public String remover(Aluno aluno) {
+		System.out.println("Chamou a remoção");
+		AlunoDAO alunoDao = new AlunoDAO();
+		alunoDao.remover(aluno);
+		System.out.println("removeu o aluno");
+		return "redirect:../aluno";
+}}

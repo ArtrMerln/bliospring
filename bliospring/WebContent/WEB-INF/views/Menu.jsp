@@ -7,7 +7,8 @@
 		<li><a href="/bliospring/" >Home</a></li>
 		<li><a href="/bliospring/aluno/form" >adicionar aluno</a></li>
 		<li><a href="/bliospring/aluno" >listar alunos</a></li>
-	
+	<li><a href="/bliospring/livro/form" >adicionar livro</a></li>
+	<li><a href="/bliospring/livro" >listar livro</a></li>
 
 	</ul>
 
