@@ -25,7 +25,7 @@ public class AlunoController {
 		
 		alunodao.inserir(aluno);
 		System.out.println("indo");
-		return "redirect:/aluno/ok";
+		return "redirect:aluno";
 	}
 	
 	
@@ -37,14 +37,15 @@ public class AlunoController {
 	
 	
 	
-	/*@GetMapping("/aluno")
+	@GetMapping("/aluno")
 	public ModelAndView listar () {
+		System.out.println("chamou a listagem");
 		AlunoDAO alunodao = new AlunoDAO();
 		List<Aluno> listand = alunodao.getLista();	
 			ModelAndView model = new ModelAndView("aluno/lista");	
 	model.addObject("alunos", listand);
 	return model;
-	}*/
+	}
 	
 	
 	
