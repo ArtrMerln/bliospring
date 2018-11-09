@@ -9,7 +9,7 @@
 <title>Todos os livros; Projeto biblioteca</title>
 </head>
 <body>
-	
+	<c:import url="../Menu.jsp"></c:import>
 
 	<h1>Lista de livros:</h1>
 

@@ -8,7 +8,7 @@
 <title>form de livro</title>
 </head>
 <body>
-
+<c:import url="../Menu.jsp"></c:import>
 	<h1>Adicionar Livro</h1>
 	<form action="/bliospring/livro" method="post">
 

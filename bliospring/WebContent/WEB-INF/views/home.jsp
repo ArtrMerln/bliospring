@@ -7,10 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>mad max</title>
 </head>
-<body>
+<body >
 
 	<c:import url="Menu.jsp"></c:import>
-	<h1>bem vindo a aplicação spring</h1>
+	<h1>BEM-VNDO A BIBLIOTECA ÉLFICA</h1>
 </body>
 
 
