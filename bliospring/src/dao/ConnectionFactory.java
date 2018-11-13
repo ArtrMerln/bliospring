@@ -9,7 +9,7 @@ public class ConnectionFactory {
 	private static Connection connection = null;
 	private static String url = "jdbc:mysql://localhost/azul";
 	private static String user = "root";
-	private static String senha = "ti72";
+	private static String senha = "lab02";
 	
 	public static Connection getConnection() {
 		if (connection == null) {
