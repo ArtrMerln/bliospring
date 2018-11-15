@@ -10,6 +10,7 @@
 	<li><a href="/bliospring/livro/form" >adicionar livro</a></li>
 	<li><a href="/bliospring/livro" >listar livro</a></li>
 <li><a href="/bliospring/emprestimo/form"> adicionar emprestimo</a>
+<li><a href="/bliospring/emprestimo"> listar emprestimo</a>
 	</ul>
 
 

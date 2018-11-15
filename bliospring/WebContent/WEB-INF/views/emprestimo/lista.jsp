@@ -34,11 +34,61 @@
 				<td><fmt:formatDate value="${emprestimo.dataEmprestimo.time }"
 							pattern="dd/MM/yyyy" /></td>
 							<td>${emprestimo.id }</td>
+							
 							<td><a
 						href="/bliospring/emprestimo/devolucion?id=${emprestimo.id}">devolver</a></td>
 				</tr>
 	
 			</c:forEach>
+
+
+</tbody>
+
+
+
+
+
+
+
+<tbody>
+			<c:forEach var="emprestimo" items="${emprestimo }">
+				<tr>
+					<td>${emprestimo.aluno.nome }</td>
+					<td>${emprestimo.livro.titulo }</td>
+					
+				<td><fmt:formatDate value="${emprestimo.dataEmprestimo.time }"
+							pattern="dd/MM/yyyy" /></td>
+							<td>${emprestimo.id }</td>
+							
+							<td><a
+						href="/bliospring/emprestimo/devolucion?id=${emprestimo.id}">devolver</a></td>
+				</tr>
+	
+		
+
+<form action="">
+  <input type="radio" name="gender" value="${emprestimo.aluno.nome }"> ${emprestimo.aluno.nome }<br>
+  <input type="radio" name="gender" value="female"> Female<br>
+  <input type="radio" name="gender" value="other"> Other</form>
+
+	</c:forEach>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 		</tbody>
 

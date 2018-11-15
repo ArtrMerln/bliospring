@@ -60,7 +60,7 @@ public class EmprestimoController {
 		EmprestimoDAO emprestimoDao = new EmprestimoDAO();
 		System.out.println(emprestimo);
 		emprestimoDao.devolv(emprestimo);
-		return "redirect:../emprestimo";
+		return "redirect:emprestimo";
 
 	}
 	

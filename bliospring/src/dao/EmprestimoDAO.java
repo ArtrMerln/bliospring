@@ -22,10 +22,10 @@ public class EmprestimoDAO {
 
 	public boolean inserir(Emprestimo emprestimo) {
 
-		String query = "insert into emprestimos (aluno, livro, dataEmprestimo, dataDevolucao) values (?, ?, ?, ?);";
+		String stmt = "insert into emprestimos (aluno, livro, dataEmprestimo, dataDevolucao) values (?, ?, ?, ?);";
 
 		try {
-			PreparedStatement p = connection.prepareStatement(query);
+			PreparedStatement p = connection.prepareStatement(stmt);
 
 			Calendar calendario = Calendar.getInstance();
 			Long calendarioEF = calendario.getTimeInMillis();
@@ -79,7 +79,8 @@ public class EmprestimoDAO {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
-				Emprestimo emprestimo = new Emprestimo();
+				Emprestimo emprestimo = new Emprestimo(); 
+				
 				Livro livro = new LivroDAO().getLivroByID(rs.getLong("livro"));
 				Aluno aluno = new AlunoDAO().getAlunoByID(rs.getLong("aluno"));
 
@@ -140,13 +141,13 @@ public class EmprestimoDAO {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
-				Emprestimo emprestimo = new Emprestimo().getLong("Emprestimo"));
+				Emprestimo emprestimo = new Emprestimo();
 
 				Aluno aluno = new AlunoDAO().getAlunoByID(rs.getLong("aluno"));
 				emprestimo.setAluno(aluno);
 				Livro livro = new LivroDAO().getLivroByID(rs.getLong("livro"));
 				emprestimo.setLivro(livro);
-				
+
 				
 
 				Calendar data = Calendar.getInstance();
@@ -168,7 +169,7 @@ public class EmprestimoDAO {
 		}
 
 	}
-
+      
 	public boolean devolucao(long aluno, long livro) {
 		Calendar cal = Calendar.getInstance();
 		Long cal1 = cal.getTimeInMillis();
