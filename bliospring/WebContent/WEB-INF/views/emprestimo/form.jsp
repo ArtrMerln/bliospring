@@ -15,11 +15,32 @@
 		<h2>
 			Alunos <select name="aluno.id">
 				<c:forEach var="aluno" items="${aluno }">
-					<option value="${aluno.id }">${aluno.nome }</option>
+					<option value="${aluno.id }" >${aluno.nome }</option>
+					
+					
+					
 				</c:forEach>
 			</select>
 		</h2>
 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		<h2>
 			Livros <select name="livro.id">
 				<c:forEach var="livro" items="${livro }">
@@ -31,3 +52,15 @@
 	</form>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -7,7 +7,7 @@ public class Livro {
 	private String editora;
 	private String anoEdicao;
 	private int anoPublicacao;
-
+private boolean emprestado;
 	public String getTitulo() {
 		return titulo;
 	}
@@ -54,6 +54,14 @@ public class Livro {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public boolean getEmprestado() {
+		return emprestado;
+	}
+
+	public void setEmprestado(boolean emprestado) {
+		this.emprestado = emprestado;
 	}
 
 }

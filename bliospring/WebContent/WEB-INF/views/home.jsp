@@ -10,7 +10,7 @@
 <body >
 
 	<c:import url="Menu.jsp"></c:import>
-	<h1>BEM-VINDO A MISERIA BIBLIOTECA</h1>
+	<h1>BEM-VINDO </h1>
 </body>
 
 

@@ -22,10 +22,10 @@ public class EmprestimoDAO {
 
 	public boolean inserir(Emprestimo emprestimo) {
 
-		String stmt = "insert into emprestimos (aluno, livro, dataEmprestimo, dataDevolucao) values (?, ?, ?, ?);";
+		String query = "insert into emprestimos (aluno, livro, dataEmprestimo) values (?, ?, ?);";
 
 		try {
-			PreparedStatement p = connection.prepareStatement(stmt);
+			PreparedStatement p = connection.prepareStatement(query);
 
 			Calendar calendario = Calendar.getInstance();
 			Long calendarioEF = calendario.getTimeInMillis();
@@ -33,11 +33,11 @@ public class EmprestimoDAO {
 			p.setLong(1, emprestimo.getAluno().getId());
 			p.setLong(2, emprestimo.getLivro().getId());
 			p.setDate(3, new java.sql.Date(calendarioEF));
-			p.setDate(4, new java.sql.Date(calendarioEF));
+			// p.setDate(4, new java.sql.Date(calendarioEF));
 
 			p.execute();
 			p.close();
-			System.out.println("Salvo com sucesso");
+			System.out.println("emprestimo coisado");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -70,7 +70,7 @@ public class EmprestimoDAO {
 
 	}
 
-	public List<Emprestimo> getListaAbertos() {
+	public List<Emprestimo> getListaAtivos() {
 		try {
 
 			List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
@@ -79,8 +79,9 @@ public class EmprestimoDAO {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
-				Emprestimo emprestimo = new Emprestimo(); 
-				
+				Emprestimo emprestimo = new Emprestimo();
+		
+				emprestimo.setId(rs.getLong("id"));
 				Livro livro = new LivroDAO().getLivroByID(rs.getLong("livro"));
 				Aluno aluno = new AlunoDAO().getAlunoByID(rs.getLong("aluno"));
 
@@ -90,6 +91,8 @@ public class EmprestimoDAO {
 				data.setTime(rs.getDate("dataEmprestimo"));
 				emprestimo.setDataEmprestimo(data);
 
+				
+				
 				if (rs.getDate("dataDevolucao") != null) {
 					Calendar dataDevolucao = Calendar.getInstance();
 					dataDevolucao.setTime(rs.getDate("dataDevolucao"));
@@ -107,7 +110,7 @@ public class EmprestimoDAO {
 
 	}
 
-	public List<Emprestimo> getListaAtraso() {
+	/*public List<Emprestimo> getListaAtraso() {
 		try {
 
 			List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
@@ -131,29 +134,29 @@ public class EmprestimoDAO {
 			throw new RuntimeException(e);
 		}
 
-	}
+	}*/
 
 	public List<Emprestimo> getLista() {
 		try {
 
 			List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
-			PreparedStatement stmt = connection.prepareStatement("select * from emprestimos");
+			PreparedStatement stmt = connection.prepareStatement("select * from emprestimos ");
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
 				Emprestimo emprestimo = new Emprestimo();
-
+                emprestimo.setId(rs.getLong("id"));
 				Aluno aluno = new AlunoDAO().getAlunoByID(rs.getLong("aluno"));
 				emprestimo.setAluno(aluno);
 				Livro livro = new LivroDAO().getLivroByID(rs.getLong("livro"));
 				emprestimo.setLivro(livro);
 
-				
-
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate("dataEmprestimo"));
 				emprestimo.setDataEmprestimo(data);
 
+				
+				
 				if (rs.getDate("dataDevolucao") != null) {
 					Calendar data2 = Calendar.getInstance();
 					data2.setTime(rs.getDate("dataDevolucao"));
@@ -169,16 +172,13 @@ public class EmprestimoDAO {
 		}
 
 	}
-      
-	public boolean devolucao(long aluno, long livro) {
-		Calendar cal = Calendar.getInstance();
-		Long cal1 = cal.getTimeInMillis();
-		String sql = "update emprestimos set dataDevolucao=? where aluno=? and livro=?;";
+
+	public boolean devolucao(Emprestimo emprestimo) {
+		String sql = "update emprestimos set dataDevolucao=? where id=?;";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
-			stmt.setDate(1, new java.sql.Date(cal1));
-			stmt.setLong(2, aluno);
-			stmt.setLong(3, livro);
+			stmt.setDate(1, new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
+			stmt.setLong(2, emprestimo.getId());
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
@@ -187,20 +187,9 @@ public class EmprestimoDAO {
 		}
 		return true;
 	}
-	public void devolv (Emprestimo emprestavel) {
-		
-		try {
-			PreparedStatement stmt = connection.prepareStatement("delete from emprestimos where id=?;");
-		stmt.setLong(1, emprestavel.getId());
-stmt.execute();
-stmt.close();
-		}catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-		}
-	
 
 	public Emprestimo getEmprestimoByID(Long id) {
+
 		try {
 
 			Emprestimo emprestimo = null;
@@ -227,6 +216,21 @@ stmt.close();
 			throw new RuntimeException(e);
 
 		}
+		
+		
+		
+		
+	}
+	public void remover (Emprestimo emprestavel) {
+		try {
+			PreparedStatement stmt = connection.prepareStatement("delete from emprestimos where id=?;");
+			stmt.setLong(1, emprestavel.getId());
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
 	}
 
 }

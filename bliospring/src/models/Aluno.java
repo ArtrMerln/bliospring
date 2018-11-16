@@ -12,7 +12,7 @@ public class Aluno {
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Calendar dataNascimento;
 	private Long id;
-
+private int md3;
 	public String getNome() {
 		return nome;
 	}
@@ -59,6 +59,14 @@ public class Aluno {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public int getMd3() {
+		return md3;
+	}
+
+	public void setMd3(int md3) {
+		this.md3 = md3;
 	}
 
 }

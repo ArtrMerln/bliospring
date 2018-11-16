@@ -24,7 +24,7 @@ public class AlunoDAO {
 
 	public boolean inserir(Aluno aluno) {
 
-		String sql = "insert into alunos (nome, matricula, cpf, endereco, dataNascimento) values (?, ?, ?, ?, ?);";
+		String sql = "insert into alunos (nome, matricula, cpf, endereco, dataNascimento, md3) values (?, ?, ?, ?, ?, 0);";
 
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -33,8 +33,7 @@ public class AlunoDAO {
 			stmt.setString(2, aluno.getMatricula());
 			stmt.setString(3, aluno.getCpf());
 			stmt.setString(4, aluno.getEndereco());
-			stmt.setDate(5, new java.sql.Date(aluno.getDataNascimento().getTimeInMillis()));
-
+			stmt.setDate(5, new java.sql.Date(aluno.getDataNascimento().getTimeInMillis()));    
 			stmt.execute();
 			stmt.close();
 
@@ -45,7 +44,7 @@ public class AlunoDAO {
 		}
 
 		return true;
-	}
+	} //ADICIONA ALUNO
 
 	public List<Aluno> getLista() {
 		try {
@@ -75,24 +74,37 @@ public class AlunoDAO {
 			throw new RuntimeException(e);
 		}
 
-	}
+	} // LISTA OS ALUNOS. 
 
-	public void alterar(Aluno a) {
-		String sql = "update alunos set nome=?, matricula=?, cpf=?, endereco=?, dataNascimento=? where id=?;";
+	public void alterarmd3mais(Aluno a) {
+		String sql = "update alunos set md3= md3 + 1 where id=?;";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
-			stmt.setString(1, a.getNome());
-			stmt.setString(2, a.getCpf());
-			stmt.setString(3, a.getMatricula());
-			stmt.setString(4, a.getEndereco());
-			stmt.setLong(6, a.getId());
+
+			stmt.setLong(1, a.getId());
 
 			stmt.execute();
 			stmt.close();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-	}
+	} //ALTERA O NUMERO DE LIVROS EMPRESTADOS DO NUMERO ATUAL PARA O NUMERO ATUAL +1
+	
+	public void alterarmd3menos(Aluno a) {
+		String sql = "update alunos set md3= md3 - 1 where id=?;";
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+		
+			stmt.setLong(1, a.getId());
+			
+			
+			
+			stmt.execute();
+			stmt.close();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	} // ALTERA O NUMERO DE LIVROS EMPRESTADOS DO NUMERO ATUAL PARA O NUMERO ATUAL -1
 
 	public void remover(Aluno a) {
 		try {
@@ -104,7 +116,7 @@ public class AlunoDAO {
 			throw new RuntimeException(e);
 		}
 
-	}
+	} // REMOVE O ALUNO PELO ID. SIMPLES ASSIM
 
 	public Aluno getAlunoByID(Long id) {
 		try {
@@ -160,4 +172,98 @@ public class AlunoDAO {
 		}
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public List<Aluno> getLista3() {
+		try {
+			List<Aluno> alunos = new ArrayList<Aluno>();
+			PreparedStatement stmt = connection.prepareStatement("select * from alunos");
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				Aluno aluno = new Aluno();
+				if (rs.getInt("md3") >= 3 ) {
+					continue;
+				}//aqui ele checa se a variavel md3 está com 3 ou mais. se ela estiver o ALUNO NAO SERÁ LISTADO NA PARTE DE ADICIONAR EMPRESTIMO
+				
+				aluno.setNome(rs.getString("nome"));
+				aluno.setCpf(rs.getString("cpf"));
+				aluno.setMatricula(rs.getString("matricula"));
+				aluno.setEndereco(rs.getString("endereco"));
+				aluno.setId(rs.getLong("id"));
+                aluno.setMd3(rs.getInt("md3")); // O MD3 SERÁ PASSADO DEPOIS 
+				Calendar data = Calendar.getInstance();
+				data.setTime(rs.getDate("dataNascimento"));
+				aluno.setDataNascimento(data);
+
+				alunos.add(aluno);
+			}
+			rs.close();
+			stmt.close();
+			return alunos;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+//ESSA É A UNICA DIFERENÇA DA LISTAGEM NORMAL
+	}
+	
+	
+	
+	
+	
+	
+	
+	// A VARIAVEL MD3 É A VARIAVEL QUE DIZ QUE O ALUNO TEM OU NAO TEM MAIS DE 3 LIVROS EMPRESTADOS. 
+	//QUANDO O ALUNO PEGA UM LIVRO EMPRESTADO ADICIONA-SE À VARIAVEL MD3 +1 
+	// QUANDO ELE TEM 3 LIVROS EMPRESTADOS ELE NAO APARECE NA ABA DE SELEÇÃO PARA EMPRESTIMO
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -69,6 +69,41 @@ public class LivroDAO {
 		}
 
 	}
+	
+	public List<Livro> getListaNemprestado() {
+		try {
+
+			List<Livro> livros = new ArrayList<Livro>();
+			PreparedStatement stmt = connec.prepareStatement("select * from livros;");
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				Livro livro = new Livro();
+				livro.setTitulo(rs.getString("titulo"));
+				livro.setAutor(rs.getString("autor"));
+				livro.setEditora(rs.getString("editora"));
+				livro.setAnoEdicao(rs.getString("anoEdicao"));
+				livro.setAnoPublicacao(rs.getInt("anoPublicacao"));
+				livro.setId(rs.getLong("id"));
+				
+				
+				
+				
+				
+				livro.setEmprestado(rs.getBoolean("emprestado"));
+				
+				
+				
+				livros.add(livro);
+			}
+			rs.close();
+			stmt.close();
+			return livros;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
 
 	
 	public void alterar(Livro l) {
