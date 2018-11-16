@@ -44,7 +44,7 @@ public class EmprestimoDAO {
 			return true;
 		}
 		return false;
-	}
+	} //adiciona emprestimo
 
 	public boolean qtdEmprestimos(Aluno aluno) throws SQLException {
 
@@ -107,7 +107,7 @@ public class EmprestimoDAO {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-
+		// lista apenas os emprestimos que não tiveram a sua data de devolução preenchida
 	}
 
 	/*public List<Emprestimo> getListaAtraso() {
@@ -138,7 +138,7 @@ public class EmprestimoDAO {
 
 	public List<Emprestimo> getLista() {
 		try {
-
+			//LISTA TODOS OS EMPRESTIMOS INDEPENDENTE SE DEVOLVEU OU NAO
 			List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 			PreparedStatement stmt = connection.prepareStatement("select * from emprestimos ");
 			ResultSet rs = stmt.executeQuery();
@@ -174,11 +174,12 @@ public class EmprestimoDAO {
 	}
 
 	public boolean devolucao(Emprestimo emprestimo) {
+		//FAZ UM UPDATE DOS EMPRESTIMOS DEVOLVENDO IMPRESTIMO APARTIR DO ID. PEGA O ID E PEGA A DATA ATUAL. AI O EMPRSTIMO É DEVOLVIDO COM BASE NA DATA ATUAL 
 		String sql = "update emprestimos set dataDevolucao=? where id=?;";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
-			stmt.setDate(1, new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
-			stmt.setLong(2, emprestimo.getId());
+			stmt.setDate(1, new java.sql.Date(Calendar.getInstance().getTimeInMillis())); // AQI PEGA A DATA ATUAL E  MANDA
+			stmt.setLong(2, emprestimo.getId()); //AQUI ELE MANDA O ID 
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
@@ -224,7 +225,7 @@ public class EmprestimoDAO {
 	public void remover (Emprestimo emprestavel) {
 		try {
 			PreparedStatement stmt = connection.prepareStatement("delete from emprestimos where id=?;");
-			stmt.setLong(1, emprestavel.getId());
+			stmt.setLong(1, emprestavel.getId());  //MANDA O ID
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
@@ -232,5 +233,5 @@ public class EmprestimoDAO {
 		}
 
 	}
-
+//DELETA O EMPRESTIMO PELO ID. SIMPLES ASSIM
 }
