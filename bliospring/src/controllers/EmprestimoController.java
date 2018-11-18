@@ -65,15 +65,32 @@ public class EmprestimoController {
 //CONTROLLER PARA DEVOLVER OS EMPRESTIMOS
 	}
 
-	@GetMapping("/emprestimo/ativos")
+	/*@GetMapping("/emprestimo/ativos")
 	public ModelAndView listarAbertos() {
 		System.out.println("listando ativos");
 		EmprestimoDAO emprestimoDao = new EmprestimoDAO();
 		List<Emprestimo> listand = emprestimoDao.getListaAtivos();
-		ModelAndView model = new ModelAndView("emprestimo/ativos");
+		ModelAndView model = new ModelAndView("emprestimo/listativos");
 		model.addObject("emprestimo", listand);
 		return model;
 //CONTROLLER PARA LISTAR TODOS OS EMPRESTIMOS ATIVOS
-	}
+	}*/
+@GetMapping("/emprestimo/a")
+public ModelAndView ativos() {
+	
+	
+	EmprestimoDAO empdao = new EmprestimoDAO();
+	List<Emprestimo> listand = empdao.getListaAtivos();
+	ModelAndView model = new ModelAndView("emprestimo/testlist");
+	model.addObject("emprestimo",listand);
+	System.out.println("listando ativos");
+	return model;
+	
+}
+
+
+
+
+
 
 }
