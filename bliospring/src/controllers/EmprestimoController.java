@@ -73,9 +73,9 @@ public class EmprestimoController {
 		EmprestimoDAO emprestimoDao = new EmprestimoDAO();
 		emprestimoDao.devolucao(emprestimo);
 		System.out.println("devolveu");
-		/*emprestimoDao.alterarmd3menos(emprestimo);
-		System.out.println("coisou md3");*/
-		return "redirect:../emprestimo";
+//emprestimoDao.getListaid(emprestimo.getId());
+		System.out.println("coisou md3");
+		return "redirect:../emprestimo/ativos";
 //CONTROLLER PARA DEVOLVER OS EMPRESTIMOS
 	}
 	

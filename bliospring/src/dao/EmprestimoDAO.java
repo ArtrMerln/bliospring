@@ -52,7 +52,7 @@ public void alterarmd3mais(Emprestimo emprestimo) {
 	try {
 		PreparedStatement stmt = connection.prepareStatement(sql);
 
-		stmt.setLong(1, emprestimo.getAluno().getId());
+		stmt.setLong(1, emprestimo.getAluno().getId() );
 		 //ALTERA O NUMERO DE LIVROS EMPRESTADOS DO NUMERO ATUAL PARA O NUMERO ATUAL +1
 		stmt.execute();
 		stmt.close();
@@ -60,12 +60,12 @@ public void alterarmd3mais(Emprestimo emprestimo) {
 		throw new RuntimeException(e);
 	}
 }
-/*public void alterarmd3menos(Emprestimo emprestimo) {
+public void alterarmd3menos(Emprestimo emprestimo) {
 	String sql = "update alunos set md3= md3 - 1 where id=?;";
 	try {
 		PreparedStatement stmt = connection.prepareStatement(sql);
 	EmprestimoDAO dao = new EmprestimoDAO();
-				dao.getListaid(emprestimo.setId());
+				
 		stmt.setLong(1, emprestimo.getAluno().getId());
 		
 		// ALTERA O NUMERO DE LIVROS EMPRESTADOS DO NUMERO ATUAL PARA O NUMERO ATUAL -1
@@ -75,7 +75,7 @@ public void alterarmd3mais(Emprestimo emprestimo) {
 	} catch (Exception e) {
 		throw new RuntimeException(e);
 	}
-} */
+} 
 //test	
 	
 	/*public boolean qtdEmprestimos(Aluno aluno) throws SQLException {
@@ -261,7 +261,7 @@ public void alterarmd3mais(Emprestimo emprestimo) {
 
 
 	
-	public List<Emprestimo> getListaid() {
+	public List<Emprestimo> getListaid(Long long1) {
 		try {
 			//LISTA TODOS OS EMPRESTIMOS INDEPENDENTE SE DEVOLVEU OU NAO
 			List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
@@ -272,8 +272,10 @@ public void alterarmd3mais(Emprestimo emprestimo) {
 				Emprestimo emprestimo = new Emprestimo();
                 emprestimo.setId(rs.getLong("id"));
 		
-
+EmprestimoDAO dao = new EmprestimoDAO();
+dao.alterarmd3menos(emprestimo);
 				emprestimos.add(emprestimo);
+				
 			}
 			rs.close();
 			stmt.close();
