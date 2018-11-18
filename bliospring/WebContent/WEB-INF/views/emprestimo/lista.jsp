@@ -23,7 +23,7 @@
 				<th>Nome do Livro</th>
 				<th>Data de emprestimo</th>
 				<th>data devolucao</th>
-				<th>coiso de devolver/apagar</th>
+				
 			</tr>
 		</thead>
 		<tbody>
@@ -46,25 +46,12 @@
 							pattern="dd/MM/yyyy" /></td>
             	
             </c:if>
-							 
 						
-				
- 			
-							
 						
-							
 						
+            	
 							
-							
-							
-							
-							
-						
-							
-							<td><a
-						href="/bliospring/emprestimo/devolucao?id=${emprestimo.id}">devolver</a></td>
-				</tr>
-	
+	</tr>
 			</c:forEach>
 
 

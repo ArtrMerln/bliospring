@@ -20,27 +20,14 @@
 					
 					
 				</c:forEach>
+				<c:forEach var="aluno" items= "${aluno }">   <input type="hidden" name="aluno.id" value="${aluno.id }"></c:forEach>
+				
+			
+			
+			
 			</select>
 		</h2>
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		<h2>
 			Livros <select name="livro.id">
 				<c:forEach var="livro" items="${livro }">

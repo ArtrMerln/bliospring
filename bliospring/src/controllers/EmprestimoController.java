@@ -24,7 +24,7 @@ public class EmprestimoController {
 		AlunoDAO alunodao = new AlunoDAO();
 		List<Aluno> listandAluno = alunodao.getLista3();
 		LivroDAO livrodao = new LivroDAO();
-		List<Livro> listandLivro = livrodao.getListaNemprestado();
+		List<Livro> listandLivro = livrodao.getLista();
 		ModelAndView model = new ModelAndView("emprestimo/form");
 		model.addObject("aluno", listandAluno);
 		model.addObject("livro", listandLivro);
@@ -32,19 +32,30 @@ public class EmprestimoController {
 	//FORMULARIO DE EMPRESTIMOS
 	}
 
-	@PostMapping("/emprestimo")
-	public String adicionar(Emprestimo emprestimo, Aluno aluno) {
+	/*@PostMapping("/emprestimo")
+	public String adicionar(Emprestimo emprestimo) {
 		EmprestimoDAO emprestimodao = new EmprestimoDAO();
 		AlunoDAO alunodao = new AlunoDAO();
 		emprestimodao.inserir(emprestimo);
-		int b = 0;
-		alunodao.alterarmd3mais(aluno.getId());
+	
 		System.out.println("adicionou o emprestimo");
 		return "redirect:emprestimo";
 	//ADICAO DO EMPRESTIMO. DEPOIS DE ADICIONADO ELE REDIRECIONA PARA A LISTA DE TODOS OS EMPRESTIMOS
-	}
+	}*/
+	
+	@PostMapping("/emprestimo")
+	public String adicionar(Emprestimo emprestimo) {
+		EmprestimoDAO emprestimodao = new EmprestimoDAO();
+		
+		emprestimodao.inserir(emprestimo);
+	
+	emprestimodao.alterarmd3mais(emprestimo);
+		System.out.println("adicionou o emprestimo e coisou o md3");
+		return "redirect:emprestimo";
+	//ADICAO DO EMPRESTIMO. DEPOIS DE ADICIONADO ELE REDIRECIONA PARA A LISTA DE TODOS OS EMPRESTIMOS
 	// test
-
+	
+	}
 	@GetMapping("/emprestimo")
 	public ModelAndView listar() {
 		System.out.println("listando emprestimos");
@@ -58,24 +69,24 @@ public class EmprestimoController {
 
 	@RequestMapping("/emprestimo/devolucao")
 	public String devolucao(Emprestimo emprestimo) {
-		System.out.println("devolveu");
+		
 		EmprestimoDAO emprestimoDao = new EmprestimoDAO();
 		emprestimoDao.devolucao(emprestimo);
+		System.out.println("devolveu");
+		/*emprestimoDao.alterarmd3menos(emprestimo);
+		System.out.println("coisou md3");*/
 		return "redirect:../emprestimo";
 //CONTROLLER PARA DEVOLVER OS EMPRESTIMOS
 	}
+	
+	
+	
+	
+	
+	
 
-	/*@GetMapping("/emprestimo/ativos")
-	public ModelAndView listarAbertos() {
-		System.out.println("listando ativos");
-		EmprestimoDAO emprestimoDao = new EmprestimoDAO();
-		List<Emprestimo> listand = emprestimoDao.getListaAtivos();
-		ModelAndView model = new ModelAndView("emprestimo/listativos");
-		model.addObject("emprestimo", listand);
-		return model;
-//CONTROLLER PARA LISTAR TODOS OS EMPRESTIMOS ATIVOS
-	}*/
-@GetMapping("/emprestimo/a")
+	
+@GetMapping("/emprestimo/ativos")
 public ModelAndView ativos() {
 	
 	
@@ -85,9 +96,22 @@ public ModelAndView ativos() {
 	model.addObject("emprestimo",listand);
 	System.out.println("listando ativos");
 	return model;
-	
+	//controler que lista os emprestimos ativos e somente os ativos. 
 }
 
+
+@GetMapping("/emprestimo/atrasados")
+public ModelAndView atraso() {
+	
+	
+	EmprestimoDAO empdao = new EmprestimoDAO();
+	List<Emprestimo> listand = empdao.getListaAtraso();
+	ModelAndView model = new ModelAndView("emprestimo/atraso");
+	model.addObject("emprestimo",listand);
+	System.out.println("listando attraso");
+	return model;
+	
+}
 
 
 

@@ -76,35 +76,9 @@ public class AlunoDAO {
 
 	} // LISTA OS ALUNOS. 
 
-	public void alterarmd3mais(Aluno a) {
-		String sql = "update alunos set md3= md3 + 1 where id=?;";
-		try {
-			PreparedStatement stmt = connection.prepareStatement(sql);
-
-			stmt.setLong(1, a.getId());
-
-			stmt.execute();
-			stmt.close();
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	} //ALTERA O NUMERO DE LIVROS EMPRESTADOS DO NUMERO ATUAL PARA O NUMERO ATUAL +1
 	
-	public void alterarmd3menos(Aluno a) {
-		String sql = "update alunos set md3= md3 - 1 where id=?;";
-		try {
-			PreparedStatement stmt = connection.prepareStatement(sql);
-		
-			stmt.setLong(1, a.getId());
-			
-			
-			
-			stmt.execute();
-			stmt.close();
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	} // ALTERA O NUMERO DE LIVROS EMPRESTADOS DO NUMERO ATUAL PARA O NUMERO ATUAL -1
+	
+	
 
 	public void remover(Aluno a) {
 		try {

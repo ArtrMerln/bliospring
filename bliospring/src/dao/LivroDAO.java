@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.ConnectionFactory;
+import models.Aluno;
 import models.Livro;
 
 
@@ -74,7 +75,7 @@ public class LivroDAO {
 		try {
 
 			List<Livro> livros = new ArrayList<Livro>();
-			PreparedStatement stmt = connec.prepareStatement("select * from livros;");
+			PreparedStatement stmt = connec.prepareStatement("select * from livros where emprestavel <> '1'");
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
@@ -189,4 +190,67 @@ public class LivroDAO {
 		}
 	
 	}
+	
+	
+	
+	public List<Livro> getLista3() {
+		try {
+
+			List<Livro> livros = new ArrayList<Livro>();
+			PreparedStatement stmt = connec.prepareStatement("select * from livros where emprestavel != 0");
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Livro livro = new Livro();
+				if (rs.getInt("emprestavel") != 0 ) {
+					continue;
+				}
+			
+				
+				livro.setTitulo(rs.getString("titulo"));
+				livro.setAutor(rs.getString("autor"));
+				livro.setEditora(rs.getString("editora"));
+				livro.setAnoEdicao(rs.getString("anoEdicao"));
+				livro.setAnoPublicacao(rs.getInt("anoPublicacao"));
+				livro.setId(rs.getLong("id"));
+
+				livros.add(livro);
+			}
+			rs.close();
+			stmt.close();
+			return livros;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+			
+			
+	public boolean adicionar1(Livro l) {
+
+		String query = "insert into livros (titulo, autor, editora, anoEdicao, anoPublicacao) values (?, ?, ?, ?, ?);";
+		try {
+			
+			PreparedStatement p = connec.prepareStatement(query);
+			p.setString(1, l.getTitulo());
+			p.setString(2, l.getAutor());
+			p.setString(3, l.getEditora());
+			p.setString(4, l.getAnoEdicao());
+			p.setInt(5, l.getAnoPublicacao());
+
+			p.execute();
+			p.close();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return true;
+		}
+		return false;
+	}
+			
+			
+			
+			
+			
+			
 }

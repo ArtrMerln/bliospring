@@ -13,7 +13,7 @@
 
 <c:import url="../Menu.jsp"></c:import>
 
-	<h1>Lista de Emprestimos ativos de todos os tempos:</h1>
+	<h1>Lista de Emprestimos ativos :</h1>
 
 	<table border="1" >
 		<thead>
@@ -26,6 +26,7 @@
 			</tr>
 		</thead>
 		<tbody>
+		
 			<c:forEach var="emprestimo" items="${emprestimo }">
 				<tr>
 					<td>${emprestimo.aluno.nome }</td>
@@ -35,8 +36,9 @@
 							pattern="dd/MM/yyyy" /></td>
 						
 							<td>${emprestimo.id }</td>
+							
 							<td><a
-						href="/bliospring/emprestimo/devolucion?id=${emprestimo.id}">devolver</a></td>
+						href="/bliospring/emprestimo/devolucao?id=${emprestimo.id}" >devolver</a></td>
 				</tr>
 	
 			</c:forEach>
